@@ -54,15 +54,13 @@ def window_graph(window_data):
 def visualize(analyzed: pd.DataFrame, debug=False):
     app = dash.Dash()
 
+    options: List[Dict[str, str]] = [{"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS]
+
     non_outlier_data = analyzed.loc[~analyzed["Outlier"]]
     outlier_data = analyzed.loc[analyzed["Outlier"]]
 
     selected_column = "BPM"
     results = results_graph(non_outlier_data, outlier_data, selected_column)
-
-    options: List[Dict[str, str]] = [
-        {"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS
-    ]
 
     app.layout = html.Div(
         [
