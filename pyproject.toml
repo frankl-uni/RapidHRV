@@ -21,7 +21,7 @@ test = [
 ]
 
 [tool.mypy]
-plugins = "numpy.typing.mypy_plugin"
+# plugins = "numpy.typing.mypy_plugin"
 ignore_missing_imports = true
 
 [tool.black]

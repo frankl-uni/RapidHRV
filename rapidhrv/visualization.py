@@ -1,3 +1,4 @@
+from typing import List, Dict
 import dash
 import pandas as pd
 import plotly.graph_objects as go
@@ -58,11 +59,13 @@ def visualize(analyzed: pd.DataFrame, debug=False):
     selected_column = "BPM"
     results = results_graph(non_outlier_data, outlier_data, selected_column)
 
+    options: List[Dict[str, str]] = [{"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS]
+
     app.layout = html.Div(
         [
             dcc.Dropdown(
                 id="column-dropdown",
-                options=[{"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS],
+                options=options,
                 value=selected_column,
                 clearable=False,
             ),
@@ -89,7 +92,7 @@ def visualize(analyzed: pd.DataFrame, debug=False):
 
         return [dcc.Graph(figure=window_graph(window_data))]
 
-    app.run_server(debug=debug, dev_tools_silence_routes_logging=True)
+    app.run(debug=debug, dev_tools_silence_routes_logging=True)
 
 
 if __name__ == "__main__":
