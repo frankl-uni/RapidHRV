@@ -59,7 +59,9 @@ def visualize(analyzed: pd.DataFrame, debug=False):
     selected_column = "BPM"
     results = results_graph(non_outlier_data, outlier_data, selected_column)
 
-    options: List[Dict[str, str]] = [{"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS]
+    options: List[Dict[str, str]] = [
+        {"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS
+    ]
 
     app.layout = html.Div(
         [
