@@ -3966,4 +3966,4 @@ notebooks = ["jupyter", "matplotlib"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<3.13"
-content-hash = "aa8a3fcbca1b49e3d6948cfd221c9930567bbda2ea42bede185da1da90f277f7"
+content-hash = "30a8785d163fbeb69a950812e3e9f385a04ee8feef431cd3289ce39e1b44b4d6"
