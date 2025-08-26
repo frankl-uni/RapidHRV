@@ -11,11 +11,11 @@ from .data import Signal
 def cubic_spline_interpolation(signal: Signal, resample_rate: int) -> Signal:
     if resample_rate % signal.sample_rate != 0:
         raise RuntimeError(
-            f"Cannot resample from {signal.sample_rate = }Hz to {resample_rate = }Hz: "
-            f"{resample_rate % signal.sample_rate = } must be zero."
+            f"Cannot resample from {signal.sample_rate=}Hz to {resample_rate=}Hz: "
+            f"{resample_rate % signal.sample_rate=} must be zero."
         )
 
-    sample_ratio = resample_rate / signal.sample_rate
+    sample_ratio = (resample_rate / signal.sample_rate)
     result_size = len(signal.data) * sample_ratio
     b_spline = scipy.interpolate.make_interp_spline(
         np.arange(0, result_size, sample_ratio), signal.data
@@ -24,9 +24,9 @@ def cubic_spline_interpolation(signal: Signal, resample_rate: int) -> Signal:
 
 
 def butterworth_filter(
-    signal: Signal,
-    cutoff_freq: float,
-    filter_type: Literal["highpass", "lowpass"],
+        signal: Signal,
+        cutoff_freq: float,
+        filter_type: Literal["highpass", "lowpass"],
 ) -> Signal:
     nyquist_freq = signal.sample_rate / 2
     sos = scipy.signal.butter(
@@ -50,11 +50,11 @@ def sg_filter(signal: Signal, sg_settings: tuple[int, int]) -> Signal:
 
 
 def preprocess(
-    signal: Signal,
-    resample_rate: Optional[int] = 1000,
-    highpass_cutoff: Optional[float] = 0.5,
-    lowpass_cutoff: Optional[float] = None,
-    sg_settings: Optional[tuple[int, int]] = (3, 100),
+        signal: Signal,
+        resample_rate: Optional[int] = 1000,
+        highpass_cutoff: Optional[float] = 0.5,
+        lowpass_cutoff: Optional[float] = None,
+        sg_settings: Optional[tuple[int, int]] = (3, 100),
 ) -> Signal:
     """Prepares cardiac data for analysis using global functions.
 
