@@ -1,4 +1,5 @@
 from typing import List, Dict
+
 import dash
 import pandas as pd
 import plotly.graph_objects as go
