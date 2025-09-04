@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 import dash
 import pandas as pd
 import plotly.graph_objects as go
@@ -5,6 +7,9 @@ from dash import dcc, html
 from dash.dependencies import Input, Output
 
 import rapidhrv as rhv
+
+# Define the type for an option
+OptionType = Dict[str, str]
 
 
 def results_graph(non_outliers, outliers, selected_column):
@@ -52,6 +57,8 @@ def window_graph(window_data):
 def visualize(analyzed: pd.DataFrame, debug=False):
     app = dash.Dash()
 
+    options: List[OptionType] = [{"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS]
+
     non_outlier_data = analyzed.loc[~analyzed["Outlier"]]
     outlier_data = analyzed.loc[analyzed["Outlier"]]
 
@@ -62,7 +69,7 @@ def visualize(analyzed: pd.DataFrame, debug=False):
         [
             dcc.Dropdown(
                 id="column-dropdown",
-                options=[{"label": col, "value": col} for col in rhv.analysis.DATA_COLUMNS],
+                options=options,  # type: ignore
                 value=selected_column,
                 clearable=False,
             ),
@@ -89,7 +96,7 @@ def visualize(analyzed: pd.DataFrame, debug=False):
 
         return [dcc.Graph(figure=window_graph(window_data))]
 
-    app.run_server(debug=debug, dev_tools_silence_routes_logging=True)
+    app.run(debug=debug, dev_tools_silence_routes_logging=True)
 
 
 if __name__ == "__main__":

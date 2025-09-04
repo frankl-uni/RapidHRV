@@ -11,8 +11,8 @@ from .data import Signal
 def cubic_spline_interpolation(signal: Signal, resample_rate: int) -> Signal:
     if resample_rate % signal.sample_rate != 0:
         raise RuntimeError(
-            f"Cannot resample from {signal.sample_rate = }Hz to {resample_rate = }Hz: "
-            f"{resample_rate % signal.sample_rate = } must be zero."
+            f"Cannot resample from {signal.sample_rate=}Hz to {resample_rate=}Hz: "
+            f"{resample_rate % signal.sample_rate=} must be zero."
         )
 
     sample_ratio = resample_rate / signal.sample_rate
