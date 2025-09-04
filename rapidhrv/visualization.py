@@ -69,14 +69,14 @@ def visualize(analyzed: pd.DataFrame, debug=False):
         [
             dcc.Dropdown(
                 id="column-dropdown",
-                options=options,
+                options=options,  # type: ignore
                 value=selected_column,
                 clearable=False,
             ),
             dcc.Graph(id="results-graph", figure=results),
             html.Div(id="window-container"),
         ]
-    )  # type: ignore
+    )
 
     @app.callback(Output("results-graph", "figure"), Input("column-dropdown", "value"))
     def update_results_graph(column):
