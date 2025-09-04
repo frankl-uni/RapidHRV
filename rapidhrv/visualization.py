@@ -76,7 +76,7 @@ def visualize(analyzed: pd.DataFrame, debug=False):
             dcc.Graph(id="results-graph", figure=results),
             html.Div(id="window-container"),
         ]
-    )
+    ) # type: ignore
 
     @app.callback(Output("results-graph", "figure"), Input("column-dropdown", "value"))
     def update_results_graph(column):
